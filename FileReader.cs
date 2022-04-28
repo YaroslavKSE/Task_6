@@ -24,4 +24,22 @@ public class FileReader
             _data.Add(point, place);
         }
     }
+    public void SearchForPlaces(Point point, int radius)
+    {
+        foreach (var VARIABLE in _data)
+        {
+
+            var inside = point.CalculateHaversine(VARIABLE.Key, radius);
+            if (inside)
+            {
+                if (VARIABLE.Value == "")
+                {
+                    continue;
+                }
+                //VARIABLE.Key.Print();
+                Console.WriteLine(VARIABLE.Value);
+            }
+        }
+    }
+
 }
