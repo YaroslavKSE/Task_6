@@ -9,7 +9,12 @@ public class Node
         Right = right;
     }
     
-    private Node Left { get; set; }
-    private Node Right { get; set; }
+    public Node Left { get; set; }
+    public Node Right { get; set; }
     private Rectangle _rectangle { get; set; }
+
+    public Rectangle GetRect()
+    {
+        return _rectangle;
+    }
 }
