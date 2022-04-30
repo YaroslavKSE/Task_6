@@ -1,23 +1,23 @@
-﻿using System.Runtime.InteropServices;
-
+﻿
 namespace Task_6;
 
 public class Point
 {
-    private readonly double _longitude;
-    private readonly double _latitude;
+    private double _latitude { get; } // широта
+    private double _longitude { get; } // довгота
+    
+    private const int EarthRadius = 6371;
 
-    public Point(double longitude, double latitude)
+    public Point(double latitude, double longitude)
     {
-        _longitude = longitude;
         _latitude = latitude;
+        _longitude = longitude;
     }
 
-    public void Print()
+    public override string ToString()
     {
-        Console.Write(_longitude.ToString()); Console.Write(" "); Console.WriteLine(_latitude);
+        return $"Long {_latitude} Lat {_longitude}";
     }
-
     public bool CalculateHaversine(Point pointSecond, double radius)
     {
         double lat1 = _latitude * Math.PI / 180;
@@ -27,6 +27,15 @@ public class Point
         double a = Math.Sin(subLat / 2) * Math.Sin(subLat / 2) +
                    Math.Cos(lat1) * Math.Cos(lat2) * Math.Sin(subLong / 2) * Math.Sin(subLat / 2);
         double c = 2 * Math.Atan2(Math.Sqrt(a), Math.Sqrt(1 - a));
-        return 6371 * c  < radius;
+        return EarthRadius * c  < radius;
+    }
+
+    public double GetLongitude()
+    {
+        return _longitude;
+    }
+    public double GetLatitude()
+    {
+        return _latitude;
     }
 }
