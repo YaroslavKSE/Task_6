@@ -1,17 +1,17 @@
-﻿using System.Security.Cryptography.X509Certificates;
-
-namespace Task_6;
+﻿namespace Task_6;
 
 public class Rectangle
 {
     public Rectangle(Point minCoords, Point maxCoords, Dictionary<Point, string> data)
     {
-        _minCoords = minCoords;
-        _maxCoords = maxCoords;
+        MinCoords = minCoords;
+        MaxCoords = maxCoords;
         _data = data;
     }
-    private Point _minCoords { get; set; }
-    private Point _maxCoords { get; set; }
+
+    private Point MinCoords { get; }
+    private Point MaxCoords { get; }
+
     private readonly Dictionary<Point, string> _data;
 
     public double FindLatMedian()
@@ -21,23 +21,12 @@ public class Rectangle
         {
             listOfLats.Add(point.Key.GetLatitude());
         }
+
         listOfLats.Sort();
-        var median  = listOfLats[listOfLats.Count / 2];
-        // var dataLeft= new  Dictionary<Point, string>();
-        // var dataRight = new  Dictionary<Point, string>();
-        // foreach (var point in _data)
-        // {
-        //     if (point.Key.GetLatitude() >= median)
-        //     {
-        //         dataRight.Add(point.Key, point.Value);
-        //     }
-        //     if (point.Key.GetLatitude() < median)
-        //     {
-        //         dataLeft.Add(point.Key, point.Value);
-        //     }
-        // }
+        var median = listOfLats[listOfLats.Count / 2];
         return median;
     }
+
     public double FindLongMedian()
     {
         var longs = new List<double>();
@@ -45,8 +34,9 @@ public class Rectangle
         {
             longs.Add(point.Key.GetLongitude());
         }
+
         longs.Sort();
-        var median  = longs[longs.Count / 2];
+        var median = longs[longs.Count / 2];
         return median;
     }
 
