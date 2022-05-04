@@ -23,7 +23,7 @@ public class KdTreeBuilder
             var median = root.GetRect().FindLatMedian();
             foreach (var point in root.GetRect().GetData())
             {
-                if (point.Key.GetLatitude() > median)
+                if (point.Key.GetLatitude() >= median)
                 {
                     dataRight.Add(point.Key, point.Value);
                 }
@@ -40,7 +40,7 @@ public class KdTreeBuilder
             var median = root.GetRect().FindLongMedian();
             foreach (var point in root.GetRect().GetData())
             {
-                if (point.Key.GetLongitude() > median)
+                if (point.Key.GetLongitude() >= median)
                 {
                     dataRight.Add(point.Key, point.Value);
                 }
