@@ -5,7 +5,7 @@ public class FileReader
     private readonly string _path;
     private readonly Dictionary<Point, string> _data;
 
-    public FileReader(string path, Dictionary<Point, string> dictionary)
+    public FileReader(Dictionary<Point, string> dictionary, string path = null)
     {
         _path = path;
         _data = dictionary;
