@@ -2,30 +2,28 @@ namespace Task_6;
 
 public class KdTreeSearcher
 {
-    private Node tree;
-    private Rectangle rectangleToSearch;
+    private readonly Node tree;
+    private Rectangle _rectangleToSearch;
 
     public KdTreeSearcher(Node tree, Rectangle rectangleToSearch)
     {
         this.tree = tree;
-        this.rectangleToSearch = rectangleToSearch;
+        this._rectangleToSearch = rectangleToSearch;
     }
 
-    public void Search(Point centre, int radius)
+    public void Search(Point centre, double radius)
     {
-        if (tree.GetRect().DoRectsOverlap(rectangleToSearch))
+        if (!tree.GetRect().DoRectsOverlap(_rectangleToSearch))
         {
             if (tree.Left == null)
             {
-                foreach (var place in tree.GetRect().GetData())
-                {
-                    new FileReader(tree.GetRect().GetData()).SearchForPlaces(centre, radius);
-                }
+                new FileReader(tree.GetRect().GetData()).SearchForPlaces(centre, radius);
+                
             }
             else
             {
-                new KdTreeSearcher(tree.Left, rectangleToSearch).Search(centre, radius);
-                new KdTreeSearcher(tree.Right, rectangleToSearch).Search(centre, radius);
+                new KdTreeSearcher(tree.Left, _rectangleToSearch).Search(centre, radius);
+                new KdTreeSearcher(tree.Right, _rectangleToSearch).Search(centre, radius);
             }
         }
     }

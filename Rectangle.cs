@@ -45,7 +45,7 @@ public class Rectangle
         return _data;
     }
 
-    public Point DescribeCircle(Point point, int distance, double bearingUp)
+    public Point DescribeCircle(Point point, double distance, double bearingUp)
     {
         bearingUp = bearingUp * Math.PI / 180;
         var φ1 = point.GetLatitude() * Math.PI / 180;
@@ -72,6 +72,7 @@ public class Rectangle
         // }
         
         // l = MaxCoords, R = MinCoords
+        
         if (MaxCoords.GetLatitude() >= rect.MinCoords.GetLatitude() ||
             rect.MaxCoords.GetLatitude() >= MinCoords.GetLatitude())
         {

@@ -1,12 +1,21 @@
-﻿using Task_6;
+﻿using System.Diagnostics;
+using Task_6;
 
 Console.OutputEncoding = System.Text.Encoding.UTF8;
-
-var point = new Point(50.60659, 30.45436);
-// point.Print();
-// point.Print();
-//var fileReader = new FileReader(@"D:\C#\Task_6\map.txt", new Dictionary<Point, string>());
-var fileReader = new FileReader(new Dictionary<Point, string>(), "map.txt");
+var fileReader = new FileReader(new Dictionary<Point, string>(), @"D:\C#\Task_6\ukraine_poi.csv");
 fileReader.ReadFile();
-
-fileReader.SearchForPlaces(new Point(48.46079, 38.82552),5);
+var pointMin = fileReader.FindMinCoords();
+var pointMax = fileReader.FindMaxCoords();
+var root = new Node(new Rectangle(pointMin, pointMax, fileReader.GetData()), null, null);
+var kdTree = new KdTreeBuilder(root);
+var kd = kdTree.BuildKd(root, fileReader.GetData().Count, 2);
+var rect = new Rectangle(pointMin, pointMax, fileReader.GetData());
+var res = rect.DescribeCircle(new Point(49.8434957584673, 24.00781313076388), 0.6, 45);
+var res2 = rect.DescribeCircle(new Point(49.8434957584673, 24.00781313076388), 0.6, 225);
+Rectangle describeCircle = new Rectangle(res, res2, new Dictionary<Point, string>());
+Console.WriteLine(rect.DoRectsOverlap(describeCircle));
+KdTreeSearcher toSearch = new KdTreeSearcher(kd, describeCircle);
+var sw = new Stopwatch();
+// fileReader.SearchForPlaces(new Point(49.8434957584673, 49.8434957584673),0.6);
+toSearch.Search(new Point(49.8434957584673, 49.8434957584673), 0.6);
+Console.WriteLine();

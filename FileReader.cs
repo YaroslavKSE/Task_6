@@ -25,26 +25,26 @@ public class FileReader
             var point = new Point(double.Parse(splitedLine[0]), double.Parse(splitedLine[1]));
             var n = splitedLine.Length - 1;
             var place = splitedLine[n - 2];
-            if (place == "")
-            {
-                continue;
-            }
+            // if (place == "")
+            // {
+            //     continue;
+            // }
 
             _data.Add(point, place);
         }
     }
 
-    public void SearchForPlaces(Point point, int radius)
+    public void SearchForPlaces(Point point, double radius)
     {
         foreach (var VARIABLE in _data)
         {
             var inside = point.CalculateHaversine(VARIABLE.Key, radius);
             if (inside)
             {
-                if (VARIABLE.Value == "")
-                {
-                    continue;
-                }
+                // if (VARIABLE.Value == "")
+                // {
+                //     continue;
+                // }
 
                 Console.WriteLine(VARIABLE.Key);
                 Console.WriteLine(VARIABLE.Value);
